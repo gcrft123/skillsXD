@@ -1,0 +1,34 @@
+{
+  "_about": "Costs that never show up as model tokens. 'tools' rules match tool names (regex) in the transcript; 'http' rules match URLs in shell commands. 'usd' is the price per call; leave it null to list the call without pricing it. 'models' adds or overrides per-model rates (USD per million tokens) when LiteLLM lacks a model.",
+  "tools": [
+    {"match": "^(WebSearch|web_search)$", "label": "Web search tool", "unit": "search", "usd": 0.01},
+    {"match": "^mcp__nanobanana__", "label": "Gemini image generation", "unit": "image", "usd": 0.039},
+    {"match": "^mcp__[^_]*(openai|dalle|gpt_image)[^_]*__.*(image|edit)", "label": "OpenAI image generation", "unit": "image", "usd": 0.04},
+    {"match": "^mcp__blender__generate_hyper3d", "label": "Hyper3D Rodin generation", "unit": "model", "usd": null},
+    {"match": "^mcp__blender__generate_hunyuan3d", "label": "Hunyuan3D generation", "unit": "model", "usd": null},
+    {"match": "^mcp__blender__generate_tripo", "label": "Tripo 3D generation", "unit": "model", "usd": null},
+    {"match": "^mcp__assets__audio_generate_sound$", "label": "AI sound generation", "unit": "clip", "usd": null},
+    {"match": "^mcp__claude_ai_Figma__(generate_image|weave_run_model|weave_run_tool|create_shader)$", "label": "Figma AI generation", "unit": "run", "usd": null},
+    {"match": "^mcp__claude_ai_Resend__(send-email|send-batch-emails|send-broadcast|reply-to-inbox-thread-email|send-inbox-draft|forward-inbox-thread-email)$", "label": "Email sends (Resend)", "unit": "send", "usd": null},
+    {"match": "(?i)^mcp__.*(sms|imessage|send_text|text_message|twilio|sendblue|telnyx|plivo|vonage|linq|loopmessage|bluebubbles)", "label": "Texts (SMS / iMessage)", "unit": "message", "usd": 0.0083},
+    {"match": "^mcp__claude_ai_Vercel__buy_", "label": "Domain purchases (Vercel)", "unit": "purchase", "usd": null}
+  ],
+  "http": [
+    {"match": "api\\.openai\\.com", "label": "OpenAI API"},
+    {"match": "api\\.anthropic\\.com/v1", "label": "Anthropic API (direct)"},
+    {"match": "generativelanguage\\.googleapis\\.com|aiplatform\\.googleapis\\.com", "label": "Google Gemini API"},
+    {"match": "api\\.x\\.ai", "label": "xAI API"},
+    {"match": "openrouter\\.ai/api", "label": "OpenRouter"},
+    {"match": "api\\.(groq|mistral|deepseek|together|fireworks|perplexity)\\.(com|ai|xyz)", "label": "Other LLM APIs"},
+    {"match": "api\\.elevenlabs\\.io", "label": "ElevenLabs"},
+    {"match": "fal\\.run|fal\\.ai/", "label": "fal.ai"},
+    {"match": "api\\.replicate\\.com", "label": "Replicate"},
+    {"match": "api\\.stability\\.ai", "label": "Stability AI"},
+    {"match": "api\\.twilio\\.com", "label": "Twilio", "unit": "request", "usd": 0.0083},
+    {"match": "api\\.sendblue\\.co", "label": "Sendblue"},
+    {"match": "api\\.(telnyx|plivo|nexmo|vonage)\\.com|api\\.linqapp\\.com|loopmessage\\.com", "label": "SMS / iMessage APIs"},
+    {"match": "api\\.resend\\.com", "label": "Resend API"},
+    {"match": "api\\.(exa|tavily|firecrawl|serper|search\\.brave)\\.|serpapi\\.com", "label": "Search APIs"}
+  ],
+  "models": {}
+}
